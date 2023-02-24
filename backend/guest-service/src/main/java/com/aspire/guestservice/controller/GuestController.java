@@ -10,6 +10,7 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
+import com.aspire.guestservice.exceptions.GuestNotFoundException;
 import com.aspire.guestservice.models.Guest;
 import com.aspire.guestservice.models.GuestInput;
 import com.aspire.guestservice.service.GuestService;
@@ -33,8 +34,13 @@ public class GuestController {
 	}
 	
 	@QueryMapping
-	public Optional<Guest> guestById(@Argument Long id){
-		return guestService.guestById(id);
+	public Guest guestById(@Argument Long id){
+		try {
+			return guestService.guestById(id);
+		}catch(GuestNotFoundException exception) {
+			throw new GuestNotFoundException(exception.getMessage());
+		}
+		
 	}
 	
 	@MutationMapping
@@ -44,11 +50,20 @@ public class GuestController {
 	
 	@MutationMapping
 	public Guest updateGuest(@Argument Long id, @Argument GuestInput guest) {
-		return guestService.updateGuest(id, guest);
+		try{
+			return guestService.updateGuest(id, guest);
+		}catch(GuestNotFoundException exception) {
+			throw new GuestNotFoundException(exception.getMessage());
+		}
 	}
 	
 	@MutationMapping
 	public List<Guest> deleteGuest(@Argument Long id){
-		return guestService.deleteGuest(id);
+		try {
+			return guestService.deleteGuest(id);
+		}catch(GuestNotFoundException exception) {
+			throw new GuestNotFoundException(exception.getMessage());
+		}
+		
 	}
 }

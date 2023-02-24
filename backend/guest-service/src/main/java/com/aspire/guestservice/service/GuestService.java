@@ -2,11 +2,13 @@ package com.aspire.guestservice.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aspire.guestservice.exceptions.GuestNotFoundException;
 import com.aspire.guestservice.models.Guest;
 import com.aspire.guestservice.models.GuestInput;
 import com.aspire.guestservice.repository.GuestRepository;
@@ -34,9 +36,15 @@ public class GuestService {
 	 * This method returns a guest's information identified by its id
 	 * @param id must not be null
 	 * @return the entity with the given id if exists
+	 * @throws GuestNotFoundException - if the guest with the specified id was not found.
 	 */
-	public Optional<Guest> guestById(Long id) {
-		return guestRepository.findById(id);
+	public Guest guestById(Long id) {
+		try {
+			return guestRepository.findById(id).get();
+		}catch(NoSuchElementException exception) {
+			throw new GuestNotFoundException("Guest not found.");
+		}
+		
 	}
 	
 	/**
@@ -60,25 +68,37 @@ public class GuestService {
 	 * @param guest's id
 	 * @param guest's information
 	 * @return the guest updated
+	 * @throws GuestNotFoundException - if the guest with the specified id was not found.
 	 */
 	public Guest updateGuest(Long id, GuestInput guest) {
-		Guest guestToUpdate = new Guest();
-		guestToUpdate.setName(guest.name());
-		guestToUpdate.setEmail(guest.email());
-		guestToUpdate.setCheckInDate(guest.checkInDate());
-		guestToUpdate.setCheckOutDate(guest.checkOutDate());
-		guestToUpdate.setPhoneNumber(guest.phoneNumber());
-		guestToUpdate.setTypeGuest(guest.typeGuest()); 
-		guestToUpdate.setIdGuest(id);
-		return guestRepository.save(guestToUpdate);
+		try {
+			Guest guestToUpdate = guestRepository.findById(id).get();
+			guestToUpdate.setName(guest.name());
+			guestToUpdate.setEmail(guest.email());
+			guestToUpdate.setCheckInDate(guest.checkInDate());
+			guestToUpdate.setCheckOutDate(guest.checkOutDate());
+			guestToUpdate.setPhoneNumber(guest.phoneNumber());
+			guestToUpdate.setTypeGuest(guest.typeGuest()); 
+			guestToUpdate.setIdGuest(id);
+		}catch(NoSuchElementException exception) {
+			throw new GuestNotFoundException("Guest to update not found");
+		}
+		return null;
 	}
 	
 	/**
 	 * This method deletes a guest identified by its id
 	 * @param id must not be null
+	 * @return the list of current guests
+	 * @throws GuestNotFoundException - if the guest with the specified id was not found.
 	 */
 	public List<Guest> deleteGuest(Long id){
-		guestRepository.deleteById(id);
-		return (ArrayList<Guest>)guestRepository.findAll();
+		try {
+			Guest guestToDelete = guestRepository.findById(id).get();
+			guestRepository.delete(guestToDelete);
+			return (ArrayList<Guest>)guestRepository.findAll();
+		}catch(NoSuchElementException exception) {
+			throw new GuestNotFoundException("Guest to delete not found");
+		}
 	}
 }
