@@ -8,6 +8,7 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
+import com.aspire.userservice.exception.UserNotFoundException;
 import com.aspire.userservice.model.User;
 import com.aspire.userservice.service.UserService;
 
@@ -22,18 +23,18 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@MutationMapping
-	public User updatePassword(@Argument String username, @Argument String password) throws Exception{ 
-		try {
-			return userService.updatePassword(username, password);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Exception(e.getMessage());
-		}
-    }
-	
 	@QueryMapping
     public List<User> users(){
     	return userService.users();
     }
+	
+	@MutationMapping
+	public User updatePassword(@Argument String username, @Argument String password){ 
+		try {
+			return userService.updatePassword(username, password);
+		} catch (UserNotFoundException exception) {
+			throw new UserNotFoundException(exception.getMessage());
+		}
+    }
+	
 }

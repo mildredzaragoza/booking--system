@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
+import com.aspire.userservice.exception.UserNotFoundException;
 import com.aspire.userservice.model.User;
 import com.aspire.userservice.repository.UserRepository;
 
@@ -28,14 +29,15 @@ public class UserService {
 	 * @param username
 	 * @param password: new password
 	 * @return the user updated
+	 * @throws UserNotFoundException - if the user with the specified id was not found.
 	 */
-    public User updatePassword(String username, String password) throws Exception {
+    public User updatePassword(String username, String password) {
 		try{
 			User userToUpdate = userRepository.findByUsername(username).get();
 	    	userToUpdate.setPassword(password);
 	    	return userRepository.save(userToUpdate);
 		}catch(NoSuchElementException exception) {
-			throw new NoSuchElementException("User to update not found.");
+			throw new UserNotFoundException("User to update not found.");
 		}
     }
     
