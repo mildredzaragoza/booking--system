@@ -1,26 +1,26 @@
 package com.aspire.userservice.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
 public class User {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	private Long id;
 	
 	@Column(name = "username", nullable = false)
 	private String username;
 	
 	@Column(name = "password", nullable = false)
-	@Size(min = 5, message = "Password must contain at least 5 digits.")
+	@Size(min = 5, message = " Password must contain at least 5 digits ")
 	private String password;
 
 	@Column(name = "role")
@@ -73,4 +73,6 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	
 }
