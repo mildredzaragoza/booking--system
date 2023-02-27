@@ -1,11 +1,13 @@
 package com.aspire.guestregisterservice.model;
 
-import java.util.ArrayList;
-
 public class Response {
 	private InfoResult info;
-	private ArrayList<Guest> results;
-	public Response(InfoResult info,  ArrayList<Guest> results) {
+	private Object results;
+	
+	public Response() {
+		
+	}
+	public Response(InfoResult info,  Object results) {
 		super();
 		this.info = info;
 		this.results = results;
@@ -16,10 +18,10 @@ public class Response {
 	public void setInfo(InfoResult info) {
 		this.info = info;
 	}
-	public ArrayList<Guest> getResult() {
+	public Object getResult() {
 		return results;
 	}
-	public void setResult(ArrayList<Guest> results) {
+	public void setResult(Object results) {
 		this.results = results;
 	}
 	

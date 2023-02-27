@@ -23,5 +23,8 @@ public class InfoResult {
 		this.message = message;
 	}
 	
+	public InfoResult() {
+		
+	}
 	
 }

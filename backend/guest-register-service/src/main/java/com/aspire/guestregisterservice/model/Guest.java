@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Pattern;
 
 @Entity
@@ -17,7 +16,6 @@ public class Guest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    @Null(message = "You cannot provide an ID, it's assigned automatically.")
     private Long id;
     
     @Column(nullable = false)

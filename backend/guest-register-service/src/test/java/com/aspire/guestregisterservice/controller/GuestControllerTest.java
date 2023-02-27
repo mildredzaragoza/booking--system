@@ -28,14 +28,14 @@ class GuestControllerTest {
 		guestOne.setTypeGuest("basic");
 		guestOne.setCheckInDate("2022-08-09");
 		guestOne.setCheckOutDate("2022-09-09");
-		ResponseEntity<Guest> responseEntity = guestController.saveGuest(guestOne);
+		ResponseEntity<Object> responseEntity = guestController.saveGuest(guestOne);
 		assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
 	}
 	
 	@Test
 	@DisplayName("Test save guest missing data")
 	public void saveGuestTestMissingData() throws Exception {
-		ResponseEntity<Guest> responseEntity = guestController.saveGuest(new Guest());
+		ResponseEntity<Object> responseEntity = guestController.saveGuest(new Guest());
 		assertEquals(responseEntity.getStatusCode(), HttpStatus.BAD_REQUEST);
 	}
 	

@@ -2,7 +2,6 @@ package com.aspire.guestregisterservice.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.DisplayName;
@@ -10,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
 
 import com.aspire.guestregisterservice.model.Guest;
 
@@ -30,7 +30,7 @@ class GuestServiceIntegrationTest {
 		guestOne.setCheckInDate("2022-08-09");
 		guestOne.setCheckOutDate("2022-09-09");
 		guestService.saveGuest(guestOne);
-		assertTrue(guestOne.getIdGuest() != null);
+		assertTrue(guestOne.getId() != null);
 	}
 	
 	
@@ -44,15 +44,15 @@ class GuestServiceIntegrationTest {
 	@Test
 	@DisplayName("Test display all guests")
 	public void getAllGuestTest() throws Exception {
-		ArrayList<Guest> guests = guestService.guests();
-		assertTrue(guests.size() > 0);
+		ResponseEntity<Object> guests = guestService.guests();
+		assertTrue(guests.getBody() !=  null);
 	}
 	
 	@Test
 	@DisplayName("Test get guest by id")
 	public void getGuestByIdTest() throws Exception {
-		Guest guest = guestService.guestById(5L);
-		assertTrue(guest != null);
+		ResponseEntity<Object> guest = guestService.guestById(5L);
+		assertTrue(guest.getBody() != null);
 	}
 	
 	@Test
@@ -89,8 +89,8 @@ class GuestServiceIntegrationTest {
 	@Test 
 	@DisplayName("Test delete guest")
 	public void testDeleteGuest() throws Exception {
-		ArrayList<Guest> guests = guestService.deleteGuest(43L);
-		assertTrue(guests.size() > 0);
+		ResponseEntity<Object> guests = guestService.deleteGuest(43L);
+		assertTrue(guests.getBody() != null);
 	}
 	
 	@Test 

@@ -11,11 +11,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.http.ResponseEntity;
 
 import com.aspire.guestregisterservice.model.Guest;
 import com.aspire.guestregisterservice.service.GuestService;
@@ -37,7 +39,7 @@ public class GuestControllerMockMVCTest {
     @Test
     @DisplayName("Guet all guests test")
     public void getAllGuestTest() throws Exception {
-    	when(guestService.guests()).thenReturn(new ArrayList<Guest>());
+    	when(guestService.guests()).thenReturn(new ResponseEntity<>(new ArrayList<Guest>(), HttpStatus.OK));
     	mockMvc.perform(MockMvcRequestBuilders.get("/guests").contentType(MediaType.APPLICATION_JSON))
     		   .andExpect(MockMvcResultMatchers.status().isOk());
     	verify(guestService).guests();
@@ -48,7 +50,7 @@ public class GuestControllerMockMVCTest {
     public void getGuestByIdTest() throws Exception {
     	long guestId = 5L;
     	Guest demoGuest = new Guest();
-    	when(guestService.guestById(guestId)).thenReturn(demoGuest);
+    	when(guestService.guestById(guestId)).thenReturn(new ResponseEntity<>(demoGuest, HttpStatus.OK));
     	mockMvc.perform(MockMvcRequestBuilders.get("/guests/{id}", guestId).contentType(MediaType.APPLICATION_JSON))
     		   .andExpect(MockMvcResultMatchers.status().isOk());
     	verify(guestService).guestById(guestId);
@@ -67,7 +69,7 @@ public class GuestControllerMockMVCTest {
     @Test
     @DisplayName("Delete guest by id test")
     public void deteleGuestTest() throws Exception{
-    	when(guestService.deleteGuest(1L)).thenReturn(new ArrayList<Guest>());
+    	when(guestService.deleteGuest(1L)).thenReturn(new ResponseEntity<>(new ArrayList<Guest>(), HttpStatus.OK));
     	mockMvc.perform(MockMvcRequestBuilders.delete("/guests/{id}", 1L).contentType(MediaType.APPLICATION_JSON))
     		   .andExpect(MockMvcResultMatchers.status().isOk());
     	verify(guestService).deleteGuest(1L);
@@ -76,7 +78,7 @@ public class GuestControllerMockMVCTest {
     @Test
     @DisplayName("Delete guest by invalid id test")
     public void deleteGuestWithInvalidIdTest() throws Exception {
-    	when(guestService.deleteGuest(500L)).thenReturn(new ArrayList<Guest>());
+    	when(guestService.deleteGuest(500L)).thenReturn(new ResponseEntity<>(new ArrayList<Guest>(), HttpStatus.OK));
     	mockMvc.perform(MockMvcRequestBuilders.delete("/guests/{id}", 500L).contentType(MediaType.APPLICATION_JSON))
     		   .andExpect(MockMvcResultMatchers.status().isNotFound());
     	verify(guestService).deleteGuest(500L);
@@ -88,7 +90,7 @@ public class GuestControllerMockMVCTest {
     	Guest demoGuest = new Guest();
     	demoGuest.setName("Demo Guest");
     	demoGuest.setEmail("demo@demo.com");
-    	when(guestService.saveGuest(any(Guest.class))).thenReturn(demoGuest);
+    	when(guestService.saveGuest(any(Guest.class))).thenReturn(new ResponseEntity<>(demoGuest, HttpStatus.OK));
     	mockMvc.perform(MockMvcRequestBuilders.post("/guests")
     			.content(objectMapper.writeValueAsString(new Guest()))
     			.contentType(MediaType.APPLICATION_JSON))
@@ -102,7 +104,7 @@ public class GuestControllerMockMVCTest {
     	Guest newGuest = new Guest();
     	newGuest.setName("Demo guest updated");
     	newGuest.setEmail("demoupdatedguest@demo.com");
-    	when(guestService.updateGuest(1L, any(Guest.class))).thenReturn(newGuest);
+    	when(guestService.updateGuest(1L, any(Guest.class))).thenReturn(new ResponseEntity<>(newGuest, HttpStatus.OK));
     	mockMvc.perform(MockMvcRequestBuilders.put("/guests/{id}", 1L)
     			.content(objectMapper.writeValueAsString(newGuest))
     			.contentType(MediaType.APPLICATION_JSON))
