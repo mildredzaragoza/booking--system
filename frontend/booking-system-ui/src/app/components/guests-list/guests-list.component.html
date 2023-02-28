@@ -1,0 +1,45 @@
+<div class="container my-6 table-container">
+    <div class="shadow-8 overflow-hidden">
+        <table class="table align-middle mb-0 bg-white">
+            <thead class="bg-light">
+                <tr>
+                    <th>Name</th>
+                    <th>Type guest</th>
+                    <th>Phone number</th>
+                    <th>Check in date</th>
+                    <th>Check out date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let guest of guests">
+                    <td>
+                        <div class="ms-3">
+                            <p class="fw-bold mb-1">{{ guest.name }}</p>
+                            <p class="text-muted mb-0">{{ guest.email }}</p>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-bold mb-1" style="text-transform: capitalize;">{{ guest.typeGuest }}</p>
+                    </td>
+                    <td>
+                        <p class="fw-bold mb-1">{{ guest.phoneNumber }}</p>
+                    </td>
+                    <td>
+                        <p class="fw-bold mb-1">{{ guest.checkInDate }}</p>
+                    </td>
+                    <td>
+                        <p class="fw-bold mb-1">{{ guest.checkOutDate }}</p>
+                    </td>
+                    <td>
+                        <div>
+                            <button type="button" class="btn btn-primary" style="margin-right: 4px;">Edit</button>
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
