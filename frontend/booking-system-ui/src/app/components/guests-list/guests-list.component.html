@@ -33,8 +33,8 @@
                     </td>
                     <td>
                         <div>
-                            <button type="button" class="btn btn-primary" style="margin-right: 4px;">Edit</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btn btn-primary" style="margin-right: 4px;" (click)="editGuest(guest.id)">Edit</button>
+                            <button type="button" class="btn btn-danger" (click)="deleteGuest(guest.id)">Delete</button>
                         </div>
                     </td>
                 </tr>

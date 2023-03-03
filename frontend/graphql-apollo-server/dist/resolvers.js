@@ -2,7 +2,7 @@ import { guests, guestById, deleteBook, addGuest, updateGuest } from './fetchers
 const resolvers = {
     Query: {
         guests: () => guests(),
-        guestById: (root, { id }) => guestById({ id }),
+        guestById: (root, { id }) => guestById({ id })
     },
     Mutation: {
         addGuest: (root, { guest }) => addGuest({ guest }),

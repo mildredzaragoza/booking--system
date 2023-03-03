@@ -1,0 +1,71 @@
+.container{
+    display: flex;
+    justify-content: center;
+}
+.guest-form{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin-top: 40px;
+    max-width: 600px;
+    min-width: 250px;
+    width: 52vw;
+    border-radius: 15px;
+    padding: 30px 30px 10px;
+    background-color:blue;
+}
+h2{
+    margin-bottom: 12px;
+    font-size: 3.1rem;
+    color: whitesmoke;
+}
+.guest-form label{
+    font-size: 1.1rem;
+    margin-bottom: 3px;
+    color: whitesmoke;
+}
+.guest-form input, select{
+    height: 30px;
+    background-color:gainsboro;
+    border-style: none;
+    outline: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding-left: 10px;
+}
+.guest-form > input:focus{
+    border: 1px solid rgb(236, 237, 242);
+    box-shadow: 0 0 3px rgb(55, 99, 255);
+    transform: scale(1.02);
+}
+
+.date-container{
+    display:flex;
+    justify-content: space-between;
+}
+.date-container input{
+    margin-top: 5px;
+    padding-right: 0;
+    margin-right: 0;
+    width: 18vw;
+    max-width: 11vw;
+    min-width: 105px;
+}
+.check-in-date {
+    margin-right: 15px;
+}
+.check-in-date .check-out-date{
+    display:flex;
+    flex-direction: column;
+}
+select{
+    font-size: 1.4rem;
+}
+button{
+    margin-bottom: 8px;
+}
+
+.success{
+    background-color: greenyellow;
+    border-color: transparent;
+}

@@ -1,0 +1,37 @@
+<div class="container">
+    <form class="guest-form" #guestForm="ngForm" (ngSubmit)="saveGuest(model); guestForm.resetForm();">
+        <h2>Guest Form</h2>
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="model.name" name="name" #name="ngModel" required>
+    
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="model.email" required>
+        
+        <label for="phoneNumber">Phone number</label>
+        <input type="tel" class="form-control" id="phoneNumber"
+                name="phoneNumber" pattern="[0-9]{10}" 
+                title="A valid phone number consist of 10 digits"
+                placeholder="Phone number of 10 digits"
+                [(ngModel)]="model.phoneNumber" required>
+      
+        <div class="date-container">
+            <div class="check-in-date">
+                <label for="checkInDate">Check in date</label>
+                <input type="date" id="checkInDate" name="checkInDate" [(ngModel)]="model.checkInDate" required>
+            </div>
+            <div class="chek-out-date">
+                <label for="checkOutDate">Check out date</label>
+                <input type="date" id="checkOutDate" name="checkOutDate" [(ngModel)]="model.checkOutDate" required>
+            </div>
+        </div>
+
+        <label for="typeGuest">Select type guest</label>
+        <select id="typeGuest" name="typeGuest" [(ngModel)]="model.typeGuest" required>
+            <option value="Basic">Basic</option>
+            <option value="Plus">Plus</option>
+        </select>
+
+        <button type="submit" class="btn success" [disabled]="!guestForm.form.valid">Submit</button>
+        <button type="button" class="btn btn-danger" (click)="cancel(); guestForm.resetForm();">Cancel</button>
+    </form>
+</div>

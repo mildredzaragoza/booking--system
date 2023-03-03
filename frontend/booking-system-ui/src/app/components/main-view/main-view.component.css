@@ -1,0 +1,40 @@
+.container{
+    display: flex;
+    justify-content: center;
+    width: 90vw;
+    height: auto;
+    margin-top: 40px;
+}
+.options-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    height: 400px;
+    width: 35vw;
+    border-radius: 15px;
+    padding: 0px 30px 10px 30px;
+    background-color: blue;
+}
+h2{
+    font-size: 3.2rem;
+    margin-bottom: 15px;
+    color: white; 
+}
+.options-container > a{
+    text-decoration: none;
+    color: black;
+    font-size: 1.4rem;
+    margin-top: 16px;
+    background-color: azure; 
+    border-radius: 5px;
+    height: 36px;
+    padding-left: 0;
+    text-align: center;
+    transition: 0.5s;
+}
+.option:hover{
+    transform: scale(1.04);
+    border: 1px solid rgb(55, 99, 255);
+    box-shadow: 0 0 5px rgb(55, 99, 255);
+}
