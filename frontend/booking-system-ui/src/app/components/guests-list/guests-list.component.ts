@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GuestsService } from 'src/app/services/guests.service';
-import { Guest } from 'src/app/graphql/types';
+import { Guest, GuestModel } from 'src/app/graphql/types';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,8 +21,9 @@ export class GuestsListComponent implements OnInit{
     this.guestService.deleteGuest(id);
   }
 
-  editGuest(id: number){
+  editGuest(id: number, guest: GuestModel){
     this.guestService.guestById(id);
+    localStorage.setItem("guest", guest.toString());
     localStorage.setItem("id", id.toString());
     this.route.navigate(["guest-form"]);
   }

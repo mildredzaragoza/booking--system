@@ -48,8 +48,8 @@ export const ADD_GUEST = gql`
 `;
 
 export const UPDATE_GUEST = gql`
-  mutation UpdateGuest($updateGuestId: ID, $guest: GuestInput) {
-    updateGuest(id: $updateGuestId, guest: $guest) {
+  mutation UpdateGuest($id: ID, $guest: GuestInput) {
+    updateGuest(id: $id, guest: $guest) {
       id
       name
       email

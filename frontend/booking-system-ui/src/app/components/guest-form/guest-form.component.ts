@@ -16,7 +16,7 @@ export class GuestFormComponent {
 
   ngOnInit(): void{
     if(this.id != null){
-      this.guestService.guestById(Number(this.id)).subscribe((guestById: any) => this.model = guestById);
+      this.guestService.guestById(Number(this.id)).subscribe((guestById: any) => this.model = {...guestById});
     }
   }
  
@@ -25,7 +25,9 @@ export class GuestFormComponent {
     if(this.id == null){
       this.guestService.addGuest(guest);
     }else{
-      this.guestService.updateGuest(Number(this.id), guest);
+      const {name, email, phoneNumber, checkInDate, checkOutDate, typeGuest} = {...guest};
+      const newGuest = new GuestModel(name, email, phoneNumber, checkInDate, checkOutDate, typeGuest);
+      this.guestService.updateGuest(Number(this.id), newGuest);
       localStorage.removeItem("id");
     }
     this.route.navigate(["guests"]);

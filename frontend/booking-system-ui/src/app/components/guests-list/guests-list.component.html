@@ -20,7 +20,7 @@
                         </div>
                     </td>
                     <td>
-                        <p class="fw-bold mb-1" style="text-transform: capitalize;">{{ guest.typeGuest }}</p>
+                        <p class="fw-bold mb-1">{{ guest.typeGuest }}</p>
                     </td>
                     <td>
                         <p class="fw-bold mb-1">{{ guest.phoneNumber }}</p>
@@ -33,7 +33,7 @@
                     </td>
                     <td>
                         <div>
-                            <button type="button" class="btn btn-primary" style="margin-right: 4px;" (click)="editGuest(guest.id)">Edit</button>
+                            <button type="button" class="btn btn-primary" style="margin-right: 4px;" (click)="editGuest(guest.id, guest)">Edit</button>
                             <button type="button" class="btn btn-danger" (click)="deleteGuest(guest.id)">Delete</button>
                         </div>
                     </td>

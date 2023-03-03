@@ -64,7 +64,7 @@ export class GuestsService {
             guest: guest
           },
           refetchQueries: [{ query: GET_GUESTS }]
-        }).subscribe((result: any) => result.data.guests)
+        }).subscribe((result: any) =>  result.data.guests)
   }
 
   guestByIdNoParams(){
