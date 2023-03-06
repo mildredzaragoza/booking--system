@@ -9,13 +9,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { GuestsListComponent } from './components/guests-list/guests-list.component';
 import { GuestFormComponent } from './components/guest-form/guest-form.component';
 import { MainViewComponent } from './components/main-view/main-view.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GuestsListComponent,
     GuestFormComponent,
-    MainViewComponent
+    MainViewComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,

@@ -37,12 +37,6 @@ export const ADD_GUEST = gql`
   mutation AddGuest($guest: GuestInput) {
     addGuest(guest: $guest ) {
       id
-      name
-      email
-      phoneNumber
-      checkInDate
-      checkOutDate
-      typeGuest
     }
   }
 `;
@@ -51,12 +45,6 @@ export const UPDATE_GUEST = gql`
   mutation UpdateGuest($id: ID, $guest: GuestInput) {
     updateGuest(id: $id, guest: $guest) {
       id
-      name
-      email
-      phoneNumber
-      checkInDate
-      checkOutDate
-      typeGuest
     }
   }
 `;

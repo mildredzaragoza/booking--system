@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Guest, GuestModel } from 'src/app/graphql/types';
+import { GuestModel } from 'src/app/graphql/types';
 import { GuestsService } from 'src/app/services/guests.service';
 
 @Component({
@@ -24,13 +24,14 @@ export class GuestFormComponent {
   saveGuest(guest: GuestModel){
     if(this.id == null){
       this.guestService.addGuest(guest);
+      this.route.navigate(["guests"]);
     }else{
       const {name, email, phoneNumber, checkInDate, checkOutDate, typeGuest} = {...guest};
       const newGuest = new GuestModel(name, email, phoneNumber, checkInDate, checkOutDate, typeGuest);
       this.guestService.updateGuest(Number(this.id), newGuest);
       localStorage.removeItem("id");
+      this.route.navigate(["main"]);
     }
-    this.route.navigate(["guests"]);
   }
 
   cancel(){

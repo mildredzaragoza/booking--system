@@ -7,11 +7,7 @@ const resolvers = {
     Mutation: {
         addGuest: (root, { guest }) => addGuest({ guest }),
         deleteGuest: (root, { id }) => deleteBook({ id }),
-        updateGuest: (root, { id, guest }) => {
-            console.log(id);
-            console.log(guest);
-            updateGuest({ id, guest });
-        }
+        updateGuest: (root, { id, guest }) => updateGuest({ id, guest })
     },
 };
 export default resolvers;

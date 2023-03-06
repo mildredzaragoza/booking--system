@@ -67,20 +67,4 @@ export class GuestsService {
         }).subscribe((result: any) =>  result.data.guests)
   }
 
-  guestByIdNoParams(){
-    this.apollo.watchQuery<any>({
-      query: gql`query GuestById {
-        guestById(id: 1) {
-          id
-          name
-          email
-          phoneNumber
-          checkInDate
-          checkOutDate
-          typeGuest
-        }}`
-    }).valueChanges.subscribe(({data}) => {
-      console.log(data.guestById);
-    })
-  }
 }
