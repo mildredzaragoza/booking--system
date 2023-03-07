@@ -14,12 +14,13 @@
     width: 35vw;
     border-radius: 15px;
     padding: 0px 30px 10px 30px;
-    background-color: blue;
+    background-color: thistle;
 }
 h2{
     font-size: 3.2rem;
     margin-bottom: 15px;
     color: white; 
+    font-weight: bolder;
 }
 .options-container > a{
     text-decoration: none;
@@ -35,6 +36,6 @@ h2{
 }
 .option:hover{
     transform: scale(1.04);
-    border: 1px solid rgb(55, 99, 255);
-    box-shadow: 0 0 5px rgb(55, 99, 255);
+    border: 1px solid rgb(255, 55, 245);
+    box-shadow: 0 0 5px rgb(255, 55, 245);
 }

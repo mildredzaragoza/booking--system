@@ -15,13 +15,13 @@ export const GET_GUESTS = gql`
   `;
 
 export const DELETE_GUEST = gql`
-    mutation DeleteGuest($id: ID){
+    mutation DeleteGuest($id: ID!){
         deleteGuest(id: $id)
     }
 `;
 
 export const GUEST_BY_ID = gql`
-  query GuestById($id: ID) {
+  query GuestById($id: ID!) {
     guestById(id: $id) {
       name
       email
@@ -34,15 +34,21 @@ export const GUEST_BY_ID = gql`
 `;
 
 export const ADD_GUEST = gql`
-  mutation AddGuest($guest: GuestInput) {
+  mutation AddGuest($guest: GuestInput!) {
     addGuest(guest: $guest ) {
       id
+      name
+      email
+      phoneNumber
+      checkInDate
+      checkOutDate
+      typeGuest
     }
   }
 `;
 
 export const UPDATE_GUEST = gql`
-  mutation UpdateGuest($id: ID, $guest: GuestInput) {
+  mutation UpdateGuest($id: ID!, $guest: GuestInput!) {
     updateGuest(id: $id, guest: $guest) {
       id
     }

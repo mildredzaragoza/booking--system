@@ -30,7 +30,7 @@ export class GuestFormComponent {
       const newGuest = new GuestModel(name, email, phoneNumber, checkInDate, checkOutDate, typeGuest);
       this.guestService.updateGuest(Number(this.id), newGuest);
       localStorage.removeItem("id");
-      this.route.navigate(["main"]);
+      this.route.navigate(["guests"]);
     }
   }
 

@@ -4,7 +4,6 @@ import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GET_GUESTS, GUEST_BY_ID, DELETE_GUEST, ADD_GUEST, UPDATE_GUEST } from '../graphql/queries';
-import { gql } from 'graphql-tag';
 
 @Injectable({
   providedIn: 'root'
@@ -45,14 +44,14 @@ export class GuestsService {
   }
 
   addGuest(guest: GuestModel){
-    this.apollo
+      this.apollo
         .mutate({
           mutation: ADD_GUEST,
           variables: { 
             guest: guest   
           },
           refetchQueries: [{ query: GET_GUESTS }]
-        }).subscribe((result: any) => result.data.guests)
+        }).subscribe((result: any) => result.data.guests) 
   }
 
   updateGuest(id: number, guest: GuestModel){

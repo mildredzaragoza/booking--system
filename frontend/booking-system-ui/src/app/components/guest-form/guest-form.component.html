@@ -2,17 +2,21 @@
     <form class="guest-form" #guestForm="ngForm" (ngSubmit)="saveGuest(model); guestForm.resetForm();">
         <h2>Guest Form</h2>
         <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" [(ngModel)]="model.name" name="name" #name="ngModel" required>
-    
+        <input type="text" class="form-control" id="name" [(ngModel)]="model.name" name="name" #name="ngModel" pattern="[a-zA-Z ]*" required>
+        <div *ngIf="name.errors?.['pattern']" class="error-message">Name cannot contain numbers</div>
+
         <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="model.email" required>
-        
+        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="model.email" #email="ngModel" email required>
+        <div *ngIf="email.errors?.['email']" class="error-message">Email is not valid</div>
+
         <label for="phoneNumber">Phone number</label>
         <input type="tel" class="form-control" id="phoneNumber"
                 name="phoneNumber" pattern="[0-9]{10}" 
                 title="A valid phone number consist of 10 digits"
                 placeholder="Phone number of 10 digits"
-                [(ngModel)]="model.phoneNumber" required>
+                [(ngModel)]="model.phoneNumber" 
+                #phoneNumber="ngModel" required>
+        <div *ngIf="phoneNumber.errors?.['pattern']" class="error-message">Phone number must haves 10 digits</div>
       
         <div class="date-container">
             <div class="check-in-date">
