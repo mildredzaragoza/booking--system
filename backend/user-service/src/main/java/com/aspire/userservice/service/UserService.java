@@ -1,9 +1,10 @@
 package com.aspire.userservice.service;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.aspire.userservice.model.User;
@@ -33,34 +34,46 @@ public class UserService {
 	 * @param username
 	 * @param password: new password
 	 * @return the user updated
-	 * @throws UserNotFoundException if the user with the specified id was not found.
-	 * @throws IllegalArgumentException - if the password does not have at least 5 digits.
 	 */
-    public User updatePassword(String username, String password) {
+    public ResponseEntity<Object> updatePassword(String username, String password) {
 		try{
 			userValidator.validate(password);
 			User userToUpdate = userRepository.findByUsername(username).get();
 	    	userToUpdate.setPassword(password);
-	    	return userRepository.save(userToUpdate);
+	    	return new ResponseEntity<>(userRepository.save(userToUpdate), HttpStatus.OK);
 		}catch(DataInvalidException exception) {
 			throw new DataInvalidException(exception.getMessage());
     	}catch(NoSuchElementException exception) {
 			throw new UserNotFoundException("User to update not found.");
-		}catch(IllegalArgumentException exception) {
-			throw new IllegalArgumentException("Provide valid user password.");
-    	}  
+    	}catch(IllegalArgumentException exception) {
+    		return new ResponseEntity<>("Provide valid user's password.", HttpStatus.BAD_REQUEST);
+		} 
     }
     
     /**
-	 * This method returns all users stored.
-	 * @return a list of users' information
-	 * @throws Exception - if the list of users is empty.
+	 * This method returns a user by its username
+	 * @return the user found
 	 */
-    public List<User> getUsers(){
+    public ResponseEntity<Object> getUsers(){
     	if(!userRepository.findAll().isEmpty()) {
-    		return  userRepository.findAll();
+    		return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
     	}else {
     		throw new UserNotFoundException("The list of users is empty.");
+    	}
+    }
+    
+    /**
+	 * This method returns a user's information identified by its username
+	 * @param username must not be null
+	 * @return Response with the information in the body
+	 */
+    public ResponseEntity<Object> getUserByUsername(String username) {
+    	try {
+    		return new ResponseEntity<>(userRepository.findByUsername(username).get(), HttpStatus.OK);
+    	}catch(IllegalArgumentException exception ) {
+          	return new ResponseEntity<>("Provide a valid username", HttpStatus.BAD_REQUEST);
+    	}catch(NoSuchElementException exception) {
+    		throw new UserNotFoundException("User not found.");
     	}
     }
 }

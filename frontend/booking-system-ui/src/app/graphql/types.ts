@@ -9,6 +9,13 @@ export type Guest = {
     typeGuest: string
 }
 
+export type User = {
+    id: number
+    username: string
+    password: string
+    role: string
+}
+
 export class GuestModel {
     constructor(
         public name: string,

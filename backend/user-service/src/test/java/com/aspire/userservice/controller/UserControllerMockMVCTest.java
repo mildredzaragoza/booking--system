@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -34,7 +36,7 @@ public class UserControllerMockMVCTest {
     @DisplayName("Update user's password test")
     public void updateUserPasswordTest() throws Exception {
     	User userToUpdate = new User("dev", "12345");
-    	when(userService.updatePassword(userToUpdate.getUsername(), userToUpdate.getPassword())).thenReturn(new User());
+    	when(userService.updatePassword(userToUpdate.getUsername(), userToUpdate.getPassword())).thenReturn(new ResponseEntity<>(new User(), HttpStatus.OK));
     	mockMvc.perform(MockMvcRequestBuilders.put("/users/{username}", userToUpdate.getUsername())
     			.content(objectMapper.writeValueAsString(userToUpdate))
     			.contentType(MediaType.APPLICATION_JSON))

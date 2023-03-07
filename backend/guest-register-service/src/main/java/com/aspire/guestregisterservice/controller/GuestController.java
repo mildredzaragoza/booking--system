@@ -44,7 +44,7 @@ public class GuestController {
         return guestService.saveGuest(newGuest);
     }
 
-    @ApiOperation(value = "Finds guest by id", response = Guest.class)
+    @ApiOperation(value = "Finds guest by id", response = ResponseEntity.class)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Request resolved successfully")
     })
@@ -53,7 +53,7 @@ public class GuestController {
         return guestService.guestById(id);
     }
 
-    @ApiOperation(value = "Updates a guest searching by id", response = Guest.class)
+    @ApiOperation(value = "Updates a guest searching by id", response = ResponseEntity.class)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Request resolved successfully")
     })
@@ -62,7 +62,7 @@ public class GuestController {
         return guestService.updateGuest(id, guest);
     }
 
-    @ApiOperation(value = "Deletes guest by id")
+    @ApiOperation(value = "Deletes guest by id", response = ResponseEntity.class)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Request resolved successfully")
     })

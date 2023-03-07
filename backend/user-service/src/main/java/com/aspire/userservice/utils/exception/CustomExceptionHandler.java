@@ -50,4 +50,15 @@ public class CustomExceptionHandler {
 		return new ResponseEntity<>(dataInvalid, HttpStatus.BAD_REQUEST);
 	}
 	
+	/**
+	 * This method handles DataInvalidException and assigns an HttpStatus code.
+	 * @param exception
+	 * @return ResponseEntity<>(exception, errorCode) 
+	 */
+	@ExceptionHandler(DataInvalidException.class)
+	public ResponseEntity<Object> handleDataInvalidException(DataInvalidException exception){
+		DataInvalid guestException = new DataInvalid(exception.getMessage(), HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(guestException, HttpStatus.BAD_REQUEST);
+	}
+	
 }
