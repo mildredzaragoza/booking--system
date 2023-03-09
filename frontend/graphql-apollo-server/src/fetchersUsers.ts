@@ -7,11 +7,23 @@ export function users(){
             .then(res => res.json())
             .then(json => json);
   }
+
+export function validateUser({user}){
+  return fetch(urlUsers + "/validate", {
+          method: 'POST',
+          body: JSON.stringify(user),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
+          }
+          })
+         .then(res => res.json())
+         .then(json => json)
+}
   
   export function userByUsername({ username }) {
     return fetch(urlUsers + `${username}`)
             .then(res => res.json())
-            .then(json => console.log(json));
+            .then(json => json)
   }
   
   export function updatePassword({ username, password }) {

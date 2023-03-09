@@ -19,4 +19,7 @@ import com.aspire.userservice.model.User;
 public interface UserRepository extends JpaRepository<User, Long>{
 	@Query(value= "SELECT * FROM users WHERE username = :username", nativeQuery = true)
 	public Optional<User> findByUsername(@Param("username") String username);
+	
+	@Query(value= "SELECT * FROM users WHERE username = :username AND password = :password", nativeQuery = true)
+	public Optional<User> login(@Param("username") String username, @Param("password") String password);
 }

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.aspire.userservice.model.User;
+import com.aspire.userservice.model.UserInput;
 import com.aspire.userservice.repository.UserRepository;
 import com.aspire.userservice.utils.exception.DataInvalidException;
 import com.aspire.userservice.utils.exception.UserNotFoundException;
@@ -74,6 +75,23 @@ public class UserService {
           	return new ResponseEntity<>("Provide a valid username", HttpStatus.BAD_REQUEST);
     	}catch(NoSuchElementException exception) {
     		throw new UserNotFoundException("User not found.");
+    	}
+    }
+    
+    /**
+	 * This method validates user and its password
+	 * @param UserInput must not be null
+	 * @return Response with the information in the body
+	 */
+    public ResponseEntity<Object> validateLogin(UserInput user){
+    	try {
+    		User userFound = userRepository.login(user.username(), user.password()).get();
+    		return new ResponseEntity<>(userFound, HttpStatus.OK);
+    	}catch(NoSuchElementException exception) {
+    		throw new UserNotFoundException("Invalid credentials");
+    	}catch(Exception exception) {
+    		exception.printStackTrace();
+    		return null;
     	}
     }
 }

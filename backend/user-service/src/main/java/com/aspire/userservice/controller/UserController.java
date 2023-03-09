@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aspire.userservice.model.UserInput;
 import com.aspire.userservice.service.UserService;
 
 import io.swagger.annotations.ApiOperation;
@@ -44,6 +46,15 @@ public class UserController {
     @GetMapping()
     public ResponseEntity<Object> getUsers(){
     	return userService.getUsers();
+    }
+    
+    @ApiOperation(value = "Validates user and its password", response = ResponseEntity.class)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Request resolved successfully")
+    })
+    @PostMapping("/validate")
+    public ResponseEntity<Object> validateUser(@RequestBody UserInput user){
+        return userService.validateLogin(user);
     }
     
     @ApiOperation(value = "Finds user by username", response = ResponseEntity.class)

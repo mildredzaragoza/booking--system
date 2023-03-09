@@ -31,7 +31,7 @@ export class UsersService {
         },
       }).valueChanges
         .pipe(
-          map(result => result.data.userByUsername)
+          map(result => console.log(result))
         )
   }
 
